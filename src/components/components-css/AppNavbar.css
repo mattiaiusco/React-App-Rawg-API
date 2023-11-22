@@ -1,0 +1,15 @@
+.login {
+    color: rgb(235, 235, 235) !important;
+}
+
+.login:hover {
+    color: red !important;
+}
+
+.register {
+    color: rgb(235, 235, 235) !important;
+}
+
+.register:hover {
+    color: red !important;
+}
