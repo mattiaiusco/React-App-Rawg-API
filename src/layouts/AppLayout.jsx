@@ -1,11 +1,13 @@
 import { Outlet } from "react-router-dom";
-import AppSidebar from "../components/AppSidebar";
 
 export default function AppLayout() {
     return (
-        <div>
-            <AppSidebar />
-            <Outlet />
+        <div className="container-fluid">
+            <div className="row">
+                <div className="col-12">
+                    <Outlet />
+                </div>
+            </div>
         </div>
     )
 }
