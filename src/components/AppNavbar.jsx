@@ -5,24 +5,21 @@ import { Link } from "react-router-dom"
 export default function AppNavbar() {
 
     return (
-        <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid d-flex flex-column justify-content-center align-items-center">
+        <nav className="navbar navbar-expand-lg">
+            <div className="container-fluid d-flex flex-column justify-content-center align-items-center">
                 <Link style={{'textDecoration': 'none', 'fontSize': '2.5rem'}} to={`/`}>GameHub</Link>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <div className="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            <Link className="nav-link" to={"/login"}>Login</Link>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
+                        <li className="nav-item">
+                        <Link className="nav-link" to={"/signup"}>Sign-up</Link>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
-                        </li>
-                        <li class="nav-item">
+                        <li className="nav-item">
                             <AppSidebar/>
                         </li>
                     </ul>
