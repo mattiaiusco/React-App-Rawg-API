@@ -6,6 +6,9 @@ import PlatformPage from "../pages/PlatformPage";
 import GamePage from "../pages/GamePage";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup"
+import Account from "../pages/Account";
+import ProtectedRoute from "../components/ProtectedRoute";
+import Settings from "../pages/Settings";
 
 export const router = createBrowserRouter([
     {
@@ -24,6 +27,20 @@ export const router = createBrowserRouter([
             {
                 path: "/signup",
                 element: <Signup />
+            },
+            {
+                path: "/",
+                element: <ProtectedRoute />,
+                children: [
+                    {
+                        path: "/account",
+                        element: <Account />
+                    },
+                    {
+                        path: "/settings",
+                        element: <Settings />
+                    }
+                ]
             },
             {
                 path: "games/:genre",

@@ -1,17 +1,43 @@
+import { useNavigate } from "react-router-dom";
+import supabase from "../supabase/database";
+
 export default function Login() {
+    const navigate = useNavigate();
+
+    const handleLogin = async (event) => {
+        event.preventDefault();
+        const loginForm = event.currentTarget;
+        const { email, password } = Object.fromEntries(
+            new FormData(loginForm)
+        )
+        try {
+            let { error } = await supabase.auth.signInWithPassword({
+                email,
+                password
+            })
+            if (error) {
+                alert(error.error_description || error.message)
+            } else {
+                loginForm.reset();
+                navigate('/account');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
         <div className="container">
             <div style={{ "height": "70vh" }} className="row justify-content-center align-items-center">
                 <div id="loginEmail" className="col-6">
                     <div style={{ "width": "70%" }} className="form-signin mx-auto mb-5">
-                        <form>
+                        <form onSubmit={handleLogin}>
                             <h1 className="mb-3">Login</h1>
                             <div className="form-floating pb-3">
-                                <input type="email" className="form-control" id="email" placeholder="name@example.com" />
+                                <input type="email" className="form-control" id="email" name="email" placeholder="name@example.com" />
                                 <label htmlFor="email">Email address</label>
                             </div>
                             <div className="form-floating pb-3">
-                                <input type="password" className="form-control" id="password" placeholder="Password" autoComplete="on" />
+                                <input type="password" className="form-control" id="password" name="password" placeholder="Password" />
                                 <label htmlFor="password">Password</label>
                             </div>
                             <button className="btn btn-primary w-100 py-2" type="submit">Sign in</button>
