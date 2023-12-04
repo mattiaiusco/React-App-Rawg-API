@@ -25,6 +25,22 @@ export default function Login() {
             console.log(error);
         }
     }
+
+    async function signInWithDiscord() {
+        try {
+            const { error } = await supabase.auth.signInWithOAuth({
+                provider: 'discord',
+            })
+            if (error) {
+                alert(error.error_description || error.message)
+            } else {
+                navigate('/settings');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div className="container">
             <div style={{ "height": "70vh" }} className="row justify-content-center align-items-center">
@@ -52,7 +68,7 @@ export default function Login() {
                                 <button className="btn"><i className="fa-brands fa-google fa-2x text-primary"></i></button>
                             </div>
                             <div className="form-floating">
-                                <button className="btn"><i className="fa-brands fa-discord fa-2x text-primary"></i></button>
+                                <button onClick={signInWithDiscord} className="btn"><i className="fa-brands fa-discord fa-2x text-primary"></i></button>
                             </div>
                         </form>
                     </div>

@@ -11,8 +11,6 @@ export default function PlatformPage() {
             try {
                 const response = await fetch(`${import.meta.env.VITE_BASE_URL}games?key=${import.meta.env.VITE_API_KEY}&platforms=${platform}`);
                 const json = await response.json();
-                console.log(json);
-    
                 // Verifica se json.results è l'array corretto
                 if (json.results) {
                     setPlatformgames(json.results);
