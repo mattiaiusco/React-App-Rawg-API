@@ -29,45 +29,38 @@ export default function AppNavbar() {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
-                        {session ? (
-                            <ul className="navbar-nav d-flex justify-content-center align-items-center">
-                                <li className="nav-item dropdown">
-                                    <details role="list" dir="rtl">
-                                        <summary aria-haspopup="listbox" role="link">
-                                            {session.user.user_metadata.username || session.user.email}
-                                        </summary>
-                                        <ul role="listbox" className="ps-0 navbar-nav flex-column">
-                                            <li className="nav-item pb-2">
-                                                <Link style={{ textDecoration: "none" }} to="/account">Account page</Link>
-                                            </li>
-                                            <li className="nav-item pb-2">
-                                                <Link style={{ textDecoration: "none" }} to="/settings">Settings page</Link>
-                                            </li>
-                                            <li className="nav-item" style={{ cursor: 'pointer' }}>
-                                                <button className="btn btn-danger p-1" type="button" onClick={handleSignOut}>
-                                                    Sign Out
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    </details>
-                                </li>
-                                <li className="nav-item">
-                                    <AppSidebar />
-                                </li>
-                            </ul>
-                        ) : (
-                            <ul className="navbar nav">
-                                <li className="nav-item pe-3">
-                                    <Link style={{ textDecoration: "none" }} to="/login">Login</Link>
-                                </li>
-                                <li className="nav-item pe-2">
-                                    <Link style={{ textDecoration: "none" }} to="/signup">Register</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <AppSidebar />
-                                </li>
-                            </ul>
-                        )}
+                    {session ? (
+                        <ul className="navbar-nav d-flex justify-content-center align-items-center">
+                            <li className="nav-item dropdown">
+                                <a style={{color: "#3ecf8e"}} className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {session.user.user_metadata.username || session.user.email}
+                                </a>
+                                <ul className="dropdown-menu">
+                                    <li className="ps-3 pb-2"><Link style={{ textDecoration: "none" }} to="/account">Account page</Link></li>
+                                    <li className="ps-3"><Link style={{ textDecoration: "none" }} to="/settings">Settings page</Link></li>
+                                    <hr className="mb-2" />
+                                    <li className="ps-3"><button className="btn btn-link text-light text-decoration-none ps-0 p-1" type="button" onClick={handleSignOut}>
+                                        Sign Out
+                                    </button></li>
+                                </ul>
+                            </li>
+                            <li className="nav-item">
+                                <AppSidebar />
+                            </li>
+                        </ul>
+                    ) : (
+                        <ul className="navbar nav">
+                            <li className="nav-item pe-3">
+                                <Link style={{ textDecoration: "none" }} to="/login">Login</Link>
+                            </li>
+                            <li className="nav-item pe-2">
+                                <Link style={{ textDecoration: "none" }} to="/signup">Register</Link>
+                            </li>
+                            <li className="nav-item">
+                                <AppSidebar />
+                            </li>
+                        </ul>
+                    )}
                 </div>
             </div>
         </nav >
