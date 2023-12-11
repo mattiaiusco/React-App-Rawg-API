@@ -3,12 +3,13 @@ import Root from "../pages/Root";
 import Home, { preLoadFilter } from "../pages/Home";
 import GenrePage from "../pages/GenrePage";
 import PlatformPage from "../pages/PlatformPage";
-import GamePage from "../pages/GamePage";
+import GamePage, {getSingleGame} from "../pages/GamePage";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup"
 import Account from "../pages/Account";
 import ProtectedRoute from "../components/ProtectedRoute";
 import Settings from "../pages/Settings";
+import CommentPage from "../pages/CommentPage";
 
 export const router = createBrowserRouter([
     {
@@ -52,7 +53,13 @@ export const router = createBrowserRouter([
             },
             {
                 path: "game/:game_name",
-                element: <GamePage />
+                element: <GamePage />,
+                loader: getSingleGame,
+            },
+            {
+                path: "game/:id/comment",
+                element: <CommentPage />,
+                loader: getSingleGame,
             },
         ],
     },

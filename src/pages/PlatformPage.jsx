@@ -9,7 +9,7 @@ export default function PlatformPage() {
     useEffect(() => {
         async function getPlatform() {
             try {
-                const response = await fetch(`${import.meta.env.VITE_BASE_URL}games?key=${import.meta.env.VITE_API_KEY}&platforms=${platform}`);
+                const response = await fetch(`${import.meta.env.VITE_BASE_URL}games?key=${import.meta.env.VITE_API_KEY}&platform=${platform}`);
                 const json = await response.json();
                 // Verifica se json.results è l'array corretto
                 if (json.results) {

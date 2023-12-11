@@ -32,7 +32,7 @@ export default function AppNavbar() {
                     {session ? (
                         <ul className="navbar-nav d-flex justify-content-center align-items-center">
                             <li className="nav-item dropdown">
-                                <a style={{color: "#3ecf8e"}} className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a style={{color: "#3ecf8e"}} className="m-0 nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     {session.user.user_metadata.username || session.user.email}
                                 </a>
                                 <ul className="dropdown-menu">
