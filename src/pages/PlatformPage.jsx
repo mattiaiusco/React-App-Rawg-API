@@ -10,8 +10,10 @@ export default function PlatformPage() {
         async function getPlatform() {
             try {
                 const response = await fetch(`${import.meta.env.VITE_BASE_URL}games?key=${import.meta.env.VITE_API_KEY}&platform=${platform}`);
+                console.log(json);
                 const json = await response.json();
-                // Verifica se json.results è l'array corretto
+
+                // Verifica se la risposta contiene l'array 'results'
                 if (json.results) {
                     setPlatformgames(json.results);
                 } else {
@@ -28,12 +30,16 @@ export default function PlatformPage() {
         <>
             <h1>{platform} games</h1>
             <div className="row">
-                {platformGames && platformGames.map((game) => (
-                    <div key={game.id} className="col-4">
-                        <CardGame game={game} />
-                    </div>
-                ))}
+                {platformGames && platformGames.length > 0 ? (
+                    platformGames.map((game) => (
+                        <div key={game.id} className="col-4">
+                            <CardGame game={game} />
+                        </div>
+                    ))
+                ) : (
+                    <p>Nessun gioco disponibile per questa piattaforma.</p>
+                )}
             </div>
         </>
-    )
+    );
 }

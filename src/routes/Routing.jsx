@@ -52,7 +52,7 @@ export const router = createBrowserRouter([
                 element: <PlatformPage />
             },
             {
-                path: "game/:game_name",
+                path: "/:game_name",
                 element: <GamePage />,
                 loader: getSingleGame,
             },

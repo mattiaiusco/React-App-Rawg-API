@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import supabase from '../supabase/database';
+import "./pages-css/commentPage.css"
 
 function CommentPage() {
     const game = useLoaderData();
@@ -41,36 +42,23 @@ function CommentPage() {
 
     return (
         <div>
-            <article>
-                <h3>
-                    Write a review about <br />
-                    <span
-                        style={{
-                            color: '#0F7A9E',
-                        }}
-                    >
-                        {game.name}
-                    </span>{' '}
-                </h3>
-                <form onSubmit={handleCommentSubmit}>
-                    <label htmlFor="title">
-                        Title
-                        <input type="text" id="title" name="title" />
-                    </label>
-                    <label htmlFor="content">
-                        Comment text
-                        <textarea
-                            type="text"
-                            id="content"
-                            name="content"
-                            placeholder="Write a comment"
-                        />
-                    </label>
-                    <button type="submit">
-                        {success ? 'Review inviata con successo ✅' : 'Publish'}
-                    </button>
-                </form>
-            </article>
+            <h3>
+                Write a review about <br />
+                <span style={{ color: "#3ecf8e" }}>{game.name}</span>
+            </h3>
+            <form className='d-flex flex-column justify-content-center  w-100' onSubmit={handleCommentSubmit}>
+                <label className='form-label' htmlFor="title">
+                    Title
+                </label>
+                <input className='form-control' type="text" id="title" name="title" />
+                <label className='form-label' htmlFor="content">
+                    Comment text
+                </label>
+                    <textarea className='form-control' type="text" id="content" name="content" placeholder="Write a review..."/>
+                <button style={{ color: "white", backgroundColor: "#3ecf8e", fontWeight: "600" }} className='btn btn-custom mt-3' type="submit">
+                    {success ? 'Review posted ✅' : 'Publish'}
+                </button>
+            </form>
         </div>
     );
 }

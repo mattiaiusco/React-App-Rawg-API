@@ -10,7 +10,6 @@ export default function GenrePage() {
         async function getGenre() {
             const response = await fetch(`${import.meta.env.VITE_BASE_URL}games?key=${import.meta.env.VITE_API_KEY}&genres=${genre}`);
             const json = await response.json();
-            console.log(json);
             setGenregames(json.results)
         }
         getGenre();

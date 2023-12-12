@@ -56,7 +56,7 @@ export default function Login() {
                                 <input type="password" className="form-control" id="password" name="password" placeholder="Password" />
                                 <label htmlFor="password">Password</label>
                             </div>
-                            <button className="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+                            <button style={{backgroundColor: "#3ecf8e", fontWeight: "600"}} className="btn btn-custom w-100 py-2" type="submit">Sign in</button>
                         </form>
                     </div>
                 </div>
@@ -65,10 +65,10 @@ export default function Login() {
                         <form className="d-flex justify-content-center align-items-center">
                             <h3 className="pe-4 m-0">Social Login</h3>
                             <div className="form-floating">
-                                <button className="btn"><i className="fa-brands fa-google fa-2x text-primary"></i></button>
+                                <button className="btn"><i style={{color :"#3ecf8e"}} className="fa-brands fa-google fa-2x"></i></button>
                             </div>
                             <div className="form-floating">
-                                <button onClick={signInWithDiscord} className="btn"><i className="fa-brands fa-discord fa-2x text-primary"></i></button>
+                                <button onClick={signInWithDiscord} className="btn"><i style={{color :"#3ecf8e"}} className="fa-brands fa-discord fa-2x"></i></button>
                             </div>
                         </form>
                     </div>

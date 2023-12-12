@@ -18,7 +18,6 @@ export async function getSingleGame({ params }) {
 }
 
 export default function GamePage() {
-    // const game = useLoaderData();
     const { session } = useContext(AppContext);
     const { game_name } = useParams();
     const [gameDetail, setGameDetail] = useState('');
@@ -87,8 +86,6 @@ export default function GamePage() {
         }
     };
 
-
-
     const handleMessageSubmit = async (event) => {
         event.preventDefault();
         const inputForm = event.currentTarget;
@@ -108,7 +105,6 @@ export default function GamePage() {
                 alert(error.message);
             } else {
                 inputForm.reset();
-                // console.log(data);
             }
         }
     };

@@ -11,7 +11,6 @@ function Messages({ game }) {
             .select('*, profile: profiles(username)')
             .eq('game_id', game.id);
         if (error) {
-            // eslint-disable-next-line no-alert
             alert(error.message);
         } else {
             setChat(data);

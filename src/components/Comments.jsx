@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import supabase from '../supabase/database';
 
+
 function Comments({ game }) {
     const [comments, setComments] = useState([]);
     useEffect(() => {

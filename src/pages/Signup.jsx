@@ -152,12 +152,12 @@ export default function Signup() {
                                 <label htmlFor="username">Confirm password</label>
                                 <Field className="form-control" name="confirm_password" type="password" />
                                 {errors.confirm_password && touched.confirm_password ? <p className="text-danger">{errors.confirm_password}</p> : null}
-                                <button className="btn btn-primary w-100 py-2 mt-3" type="submit">Sign up</button>
+                                <button style={{backgroundColor: "#3ecf8e", fontWeight: "600"}} className="btn btn-custom w-100 py-2 mt-3" type="submit">Sign up</button>
                             </Form>
                         )}
                     </Formik>
                 </div>
-                <p><Link to={"/login"}>Already have an account? Please click here to login.</Link></p>
+                <p><Link style={{color: "#3ecf8e"}} to={"/login"}>Already have an account? Please click here to login.</Link></p>
             </div>
         </>
     )
