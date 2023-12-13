@@ -20,7 +20,7 @@ export default function GenrePage() {
             <h1>{genre} games</h1>
             <div className="row">
                 {genreGames && genreGames.map((game) => (
-                    <div key={game.id} className="col-4">
+                    <div key={game.id} className="col-12 col-md-4">
                         <CardGame game={game} />
                     </div>
                 ))}
