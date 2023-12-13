@@ -8,7 +8,7 @@ export default function GenrePage() {
 
     useEffect(() => {
         async function getGenre() {
-            const response = await fetch(`${import.meta.env.VITE_BASE_URL}games?key=${import.meta.env.VITE_API_KEY}&genres=${genre}`);
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}games?key=${import.meta.env.VITE_API_KEY}&genres=${genre}&page_size=21`);
             const json = await response.json();
             setGenregames(json.results)
         }

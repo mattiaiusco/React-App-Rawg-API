@@ -9,7 +9,7 @@ export default function PlatformPage() {
     useEffect(() => {
         async function getPlatform() {
             try {
-                const response = await fetch(`${import.meta.env.VITE_BASE_URL}games?key=${import.meta.env.VITE_API_KEY}&platform=${platform}`);
+                const response = await fetch(`${import.meta.env.VITE_BASE_URL}games?key=${import.meta.env.VITE_API_KEY}&platforms=${platform}&page_size=21`);
                 console.log(json);
                 const json = await response.json();
 
@@ -30,15 +30,11 @@ export default function PlatformPage() {
         <>
             <h1>{platform} games</h1>
             <div className="row">
-                {platformGames && platformGames.length > 0 ? (
-                    platformGames.map((game) => (
-                        <div key={game.id} className="col-4">
-                            <CardGame game={game} />
-                        </div>
-                    ))
-                ) : (
-                    <p>Nessun gioco disponibile per questa piattaforma.</p>
-                )}
+                {platformGames && platformGames.map((game) => (
+                    <div key={game.id} className="col-4">
+                        <CardGame game={game} />
+                    </div>
+                ))}
             </div>
         </>
     );

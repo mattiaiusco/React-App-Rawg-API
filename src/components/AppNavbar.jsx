@@ -24,7 +24,7 @@ export default function AppNavbar() {
     return (
         <nav className="navbar navbar-expand-lg">
             <div className="container-fluid d-flex flex-column justify-content-center align-items-center">
-                <Link style={{ 'textDecoration': 'none', 'fontSize': '2.5rem' }} to={`/`}>GameHub</Link>
+                <Link style={{ 'textDecoration': 'none', 'fontSize': '2.5rem' }} to={`/`}>Game<span style={{color: "#3ecf8e"}}>Hub</span></Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

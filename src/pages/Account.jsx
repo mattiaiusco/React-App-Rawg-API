@@ -4,6 +4,7 @@ import getProfileImg from '../utils/getProfileImg';
 import formatMessageDate from '../utils/formatMessageDate';
 import supabase from '../supabase/database';
 import AppContext from '../contexts/AppContext';
+import "./pages-css/account.css"
 
 function Account() {
     const { session } = useContext(AppContext);
@@ -11,7 +12,7 @@ function Account() {
     const [comments, setComments] = useState([]);
     const [favorites, setFavorites] = useState([]);
 
-    
+
     useEffect(() => {
         const getComments = async () => {
             const { data, error } = await supabase
@@ -53,41 +54,34 @@ function Account() {
                 width={200}
             />
             <h1>
-                Benvenuto
-                {profile && (profile.usename || session.user.user_metadata.full_name)}
+                Welcome <span style={{ color: "#3ecf8e" }}>{profile && (profile.username || session.user.user_metadata.full_name)}</span>
             </h1>
             <div>
-                <details>
-                    <summary>Le tue Reviews</summary>
-                    {comments.map((c) => (
-                        <div key={c.id}>
-                            <div>
-                                <article>
-                                    <h5>{c.comment_title}</h5>
-                                    <p>{c.comment_content}</p>
-                                    <div>
-                                        <p style={{ color: "#3ecf8e" }}>
-                                            Published by: {c.profile.username}
-                                        </p>
-                                        <p>
-                                            {formatMessageDate(c.created_at)}
-                                        </p>
-                                    </div>
-                                </article>
-                            </div>
+                <h3 className='mt-4'><span style={{textDecoration: "line-through", textDecorationThickness: "15px", textDecorationColor: "#3ecf8e93"}}><span className='position-absolute'>Reviews</span>Reviews</span></h3>
+                {comments.map((c) => (
+                    <div key={c.id}>
+                        <div>
+                            <article className='px-3 py-1 mb-3 mt-2 rounded' style={{ backgroundColor: "rgba(255, 255, 255, 0.05)" }}>
+                                <h5 className='px-2 py-3'>{c.comment_title}</h5>
+                                <p className='px-2 py-0'>{c.comment_content}</p>
+                                <div>
+                                    <p className='px-2 pb-0' style={{ color: "#3ecf8e" }}>
+                                        Published by: <span className='text-light'>{c.profile.username}</span><span><p style={{ fontSize: "9px" }} className='m-0'>
+                                        {formatMessageDate(c.created_at)}
+                                    </p></span>
+                                    </p>
+                                </div>
+                            </article>
                         </div>
-                    ))}
-                </details>
-
-                <details>
-                    <summary>I tuoi Preferiti</summary>
-                    <ul>
-                        {favorites &&
-                            favorites.map((favGame) => (
-                                <li key={favGame.id}>{favGame.game_name}</li>
-                            ))}
-                    </ul>
-                </details>
+                    </div>
+                ))}
+                <h3 className='mt-4'><span style={{textDecoration: "line-through", textDecorationThickness: "15px", textDecorationColor: "#3ecf8e93"}}><span className='position-absolute'>Favorites</span>Favorites</span></h3>
+                <ul>
+                    {favorites &&
+                        favorites.map((favGame) => (
+                            <li key={favGame.id}>{favGame.game_name}</li>
+                        ))}
+                </ul>
             </div>
         </div>
     );

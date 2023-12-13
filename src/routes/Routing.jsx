@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Root from "../pages/Root";
 import Home, { preLoadFilter } from "../pages/Home";
 import GenrePage from "../pages/GenrePage";
-import PlatformPage from "../pages/PlatformPage";
+// import PlatformPage from "../pages/PlatformPage";
 import GamePage, {getSingleGame} from "../pages/GamePage";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup"
@@ -47,10 +47,10 @@ export const router = createBrowserRouter([
                 path: "games/:genre",
                 element: <GenrePage />
             },
-            {
-                path: "games/:platform",
-                element: <PlatformPage />
-            },
+            // {
+            //     path: "games/:platform",
+            //     element: <PlatformPage />
+            // },
             {
                 path: "/:game_name",
                 element: <GamePage />,

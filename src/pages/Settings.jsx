@@ -72,7 +72,7 @@ export default function Settings() {
     }
 
     return (
-        <form style={{height:"80vh"}} className='d-flex flex-column justify-content-center align-items-center'
+        <form style={{ height: "80vh"}} className='d-flex flex-column justify-content-center align-items-center'
             onSubmit={updateProfile}
         >
             <Avatar
@@ -83,36 +83,36 @@ export default function Settings() {
                 }}
             />
             <div className="grid">
-                <label htmlFor="first_name">
+                <label className='pt-3' htmlFor="first_name">
                     First name
-                    <input
-                        className='form-control'
-                        type="text"
-                        id="first_name"
-                        name="first_name"
-                        placeholder="First name"
-                        value={first_name || ''}
-                        onChange={(e) => setfirstName(e.target.value)}
-                    />
                 </label>
+                <input
+                    className='form-control'
+                    type="text"
+                    id="first_name"
+                    name="first_name"
+                    placeholder="First name"
+                    value={first_name || ''}
+                    onChange={(e) => setfirstName(e.target.value)}
+                />
                 <label htmlFor="last_name">
                     Last name
-                    <input
-                        className='form-control'
-                        type="text"
-                        id="last_name"
-                        name="last_name"
-                        placeholder="Last name"
-                        value={last_name || ''}
-                        onChange={(e) => setLastName(e.target.value)}
-                    />
                 </label>
+                <input
+                    className='form-control'
+                    type="text"
+                    id="last_name"
+                    name="last_name"
+                    placeholder="Last name"
+                    value={last_name || ''}
+                    onChange={(e) => setLastName(e.target.value)}
+                />
             </div>
-            <div>
+            <div className='py-3'>
                 <label htmlFor="email">
                     Email
-                    <input className='form-control' id="email" type="text" value={session.user.email} disabled />
                 </label>
+                <input className='form-control' id="email" type="text" value={session.user.email} disabled />
             </div>
             <div>
                 <label htmlFor="username">
@@ -128,13 +128,10 @@ export default function Settings() {
                 </label>
             </div>
             <div>
-                <button className='btn btn-dark' type="submit" disabled={loading}>
+                <button style={{ color: "white", backgroundColor: "#3ecf8e", fontWeight: "600" }} className="btn btn-custom p-2" type="submit" disabled={loading}>
                     {loading ? 'Loading ...' : 'Update'}
                 </button>
-                <button
-                    className="btn text-white btn-link"
-                    type="button"
-                    onClick={() => supabase.auth.signOut()}
+                <button style={{ color: "#3ecf8e" }} className="btn btn-link" type="button" onClick={() => supabase.auth.signOut()}
                 >
                     Sign Out
                 </button>

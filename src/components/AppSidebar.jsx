@@ -1,17 +1,17 @@
 import { useLoaderData } from "react-router-dom";
 import Genres from "./Genres";
-import Platforms from "./Platforms";
+// import Platforms from "./Platforms";
 
 export default function AppSidebar() {
     const {
         genres,
-        platforms
+        // platforms
     } = useLoaderData();
 
     return (
         <div className="d-flex">
             <Genres genres={genres} />
-            <Platforms platforms={platforms} />
+            {/* <Platforms platforms={platforms} /> */}
         </div>
     )
 }

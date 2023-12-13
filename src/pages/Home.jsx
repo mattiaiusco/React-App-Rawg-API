@@ -52,7 +52,7 @@ export default function Home() {
                 setGames1([]);
                 setError('');
                 try {
-                    const response = await fetch(`${import.meta.env.VITE_BASE_URL}games?key=${import.meta.env.VITE_API_KEY}&page=${pagination}&page_size=20&search=${search}`);
+                    const response = await fetch(`${import.meta.env.VITE_BASE_URL}games?key=${import.meta.env.VITE_API_KEY}&page=${pagination}&page_size=21&search=${search}`);
                     if (response.ok) {
                         const json = await response.json();
                         // await new Promise((resolve) => setTimeout(resolve, 1500));  //! ritardo fittizio per far vedere all'utente che c'è un caricamento in attivo
@@ -96,13 +96,13 @@ export default function Home() {
 
             <div className="row">
                 {games1 && games1.map((game) => (
-                    <div key={game.id} className="col-4">
+                    <div key={game.id} className="col-12 col-md-4">
                         <CardGame game={game} />
                     </div>
                 ))}
                 <div className="d-flex justify-content-center mt-5">
-                    {pagination == 1 ? '' : <button className="btn btn-dark me-4" onClick={handlePrevPage}>Prev page</button>}
-                    <button className="btn btn-dark" onClick={handleNextPage}>Next page</button>
+                    {pagination == 1 ? '' : <button style={{ color: "white", borderColor: "#3ecf8e", fontWeight: "600" }} className="btn btn-custom p-2 me-4" onClick={handlePrevPage}>Prev page</button>}
+                    <button style={{ color: "white", backgroundColor: "#3ecf8e", fontWeight: "600" }} className="btn btn-custom p-2" onClick={handleNextPage}>Next page</button>
                 </div>
             </div>
 

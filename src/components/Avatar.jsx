@@ -63,11 +63,11 @@ export default function Avatar({ url, size, onUpload }) {
                 <img
                     src={avatarUrl}
                     alt="Avatar"
-                    className="avatar image"
+                    className="avatar image rounded-4"
                     style={{
                         height: size,
                         width: size,
-                        boxShadow: '1px 1px 10px #030405',
+                        boxShadow: '0 0 10px #3ecf8e',
                     }}
                 />
             ) : (
@@ -76,16 +76,16 @@ export default function Avatar({ url, size, onUpload }) {
                     style={{
                         height: size,
                         width: size,
-                        boxShadow: '1px 1px 10px #030405',
+                        boxShadow: '0 0 10px #3ecf8e',
                     }}
                 />
             )}
             <div style={{ width: size }}>
                 <button
-                    className='btn btn-link text-white mb-3 ps-0'
+                    className='btn btn-link mb-3 ps-0'
                     type="button"
                     style={{
-                        marginTop: '10px',
+                        marginTop: '10px', color: "#3ecf8e"
                     }}
                 >
                     {uploading ? 'Uploading ...' : 'Upload'}
