@@ -30,6 +30,9 @@ export default function Login() {
         try {
             const { error } = await supabase.auth.signInWithOAuth({
                 provider: 'discord',
+                options: {
+                    redirectTo: 'https://gamehub-delta.vercel.app/',
+                },
             })
             if (error) {
                 alert(error.error_description || error.message)
