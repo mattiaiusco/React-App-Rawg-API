@@ -3,22 +3,29 @@ import supabase from '../supabase/database';
 
 function Messages({ game }) {
     const [chat, setChat] = useState([]);
+    const [loading, setLoading] = useState(true); // New loading state
     const chatRef = useRef(null);
 
     const getMessages = async () => {
-        const { data, error } = await supabase
-            .from('messages')
-            .select('*, profile: profiles(username)')
-            .eq('game_id', game.id);
-        if (error) {
-            alert(error.message);
-        } else {
-            setChat(data);
+        try {
+            const { data, error } = await supabase
+                .from('messages')
+                .select('*, profile: profiles(username)')
+                .eq('game_id', game.id);
+
+            if (error) {
+                alert(error.message);
+            } else {
+                setChat(data);
+            }
+        } finally {
+            setLoading(false); // Set loading to false regardless of success or error
         }
     };
 
     useEffect(() => {
         getMessages();
+
         const subscription = supabase
             .channel('messages')
             .on(
@@ -34,7 +41,11 @@ function Messages({ game }) {
         return () => {
             subscription.unsubscribe();
         };
-    }, []);
+    }, [game.id]);
+
+    if (loading) {
+        return <p>Loading messages...</p>; // Display a loading message while fetching data
+    }
 
     return (
         <div className='vh-50 text-light' ref={chatRef}>
@@ -50,4 +61,5 @@ function Messages({ game }) {
         </div>
     );
 }
+
 export default Messages;

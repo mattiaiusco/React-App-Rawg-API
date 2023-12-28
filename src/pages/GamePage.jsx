@@ -1,12 +1,11 @@
 import { useEffect, useState, useContext } from "react";
-import { useParams, useLoaderData } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import useProfile from "../hooks/useProfile";
 import supabase from "../supabase/database";
 import Messages from "../components/Messages";
 import Comments from "../components/Comments";
 import AppContext from "../contexts/AppContext";
-import "./pages-css/gamePage.css"
+import "./pages-css/gamePage.css";
 
 export async function getSingleGame({ params }) {
     const response = await fetch(
@@ -18,15 +17,18 @@ export async function getSingleGame({ params }) {
 
 export default function GamePage() {
     const { session } = useContext(AppContext);
+    const { profile } = useProfile();
     const { game_name } = useParams();
     const [gameDetail, setGameDetail] = useState('');
-    const { profile } = useProfile();
     const [fav, setFav] = useState({
         list: [],
-        isFavorite: false, // Flag indicating whether the current game is in favorites
+        isFavorite: false,
+        loading: false,
     });
 
     const getFavGame = async () => {
+        setFav((prevFav) => ({ ...prevFav, loading: true }));
+
         const { data, error } = await supabase
             .from('favorites')
             .select('*')
@@ -38,11 +40,11 @@ export default function GamePage() {
         } else {
             setFav({
                 list: [...data],
-                isFavorite: data.length > 0, // Set the flag based on whether the current game is in favorites
+                isFavorite: data.length > 0,
+                loading: false,
             });
         }
     };
-
 
     const addToFavorites = async () => {
         const { error } = await supabase
@@ -63,7 +65,6 @@ export default function GamePage() {
 
     const removeFromFavorites = async () => {
         if (!session || !session.user) {
-            // Handle the case where session or session.user is not available
             return;
         }
 
@@ -94,7 +95,7 @@ export default function GamePage() {
                 .from('messages')
                 .insert([
                     {
-                        profile_id: profile.id,
+                        profile_id: session.user.id,
                         game_id: gameDetail.id,
                         content: message,
                     },
@@ -108,10 +109,20 @@ export default function GamePage() {
         }
     };
     useEffect(() => {
-        if (session) {
+        async function fetchData() {
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}games/${game_name}?key=${import.meta.env.VITE_API_KEY}`);
+            const json = await response.json();
+            setGameDetail(json);
+        }
+
+        fetchData();
+    }, [game_name, session]);
+
+    useEffect(() => {
+        if (gameDetail && session) {
             getFavGame();
         }
-    }, [session, game_name])
+    }, [gameDetail, session]);
 
     useEffect(() => {
         async function getDetails() {
@@ -124,22 +135,42 @@ export default function GamePage() {
 
     return (
         <>
-            <div style={{ backgroundColor: gameDetail.dominant_color }}>
+            <div>
                 <div className="row justify-content-center align-items-center">
                     <div className="col-auto">
                         <h1>{gameDetail.name}</h1>
                     </div>
+                    {session ? (
                     <div className="col-auto">
                         {fav.isFavorite ? (
-                            <div className="d-flex align-items-center">
-                                <button style={{ fontSize: "1.5rem", color: "#3ecf8e", fontWeight: "600" }} className="btn btn-custom rounded-pill" type="submit" onClick={removeFromFavorites}><i className="fa-solid fa-heart"></i></button>
-                            </div>
-                        ) : (
-                            <div className="d-flex align-items-center">
-                                <button style={{ fontSize: "1.5rem", color: "white", fontWeight: "600" }} className="btn btn-custom rounded-pill" type="submit" onClick={addToFavorites}><i className="fa-regular fa-heart"></i></button>
-                            </div>
-                        )}
+                        <div className="d-flex align-items-center">
+                            <button
+                                style={{ fontSize: "1.5rem", color: "#3ecf8e", fontWeight: "600" }}
+                                className="btn btn-custom rounded-pill"
+                                type="submit"
+                                onClick={removeFromFavorites}
+                                disabled={fav.loading}
+                            >
+                                <i className="fa-solid fa-heart"></i>
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="d-flex align-items-center">
+                            <button
+                                style={{ fontSize: "1.5rem", color: "white", fontWeight: "600" }}
+                                className="btn btn-custom rounded-pill"
+                                type="submit"
+                                onClick={addToFavorites}
+                                disabled={fav.loading}
+                            >
+                                <i className="fa-regular fa-heart"></i>
+                            </button>
+                        </div>
+                    )}
                     </div>
+                    ) : (
+                        <div></div>
+                    )}
                 </div>
                 <img className="img-fluid" src={gameDetail.background_image} alt="" />
                 <p className="pt-4 pb-5">{gameDetail.description_raw}</p>

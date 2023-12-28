@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { useState, useEffect, useContext } from 'react';
 import supabase from '../supabase/database';
 import AppContext from '../contexts/AppContext';
@@ -47,10 +46,17 @@ export default function Settings() {
 
     async function updateProfile(event, avatarUrl) {
         event.preventDefault();
-
+    
+        // Display confirmation dialog
+        const isConfirmed = window.confirm('Are you sure you want to update your profile?');
+    
+        if (!isConfirmed) {
+            return; // User clicked Cancel, do nothing
+        }
+    
         setLoading(true);
         const { user } = session;
-
+    
         const updates = {
             id: user.id,
             username,
@@ -59,17 +65,17 @@ export default function Settings() {
             avatar_url,
             updated_at: new Date(),
         };
-
+    
         const { error } = await supabase.from('profiles').upsert(updates);
-
+    
         if (error) {
-            // eslint-disable-next-line no-alert
             alert(error.message);
         } else {
             setAvatarUrl(avatarUrl);
         }
         setLoading(false);
     }
+    
 
     return (
         <form style={{ height: "80vh"}} className='d-flex flex-column justify-content-center align-items-center'
