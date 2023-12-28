@@ -67,9 +67,6 @@ export default function Login() {
                     <div style={{ "width": "70%" }} className="form-signin mx-auto d-flex justify-content-center align-items-center">
                         <form className="d-flex justify-content-center align-items-center">
                             <h3 className="pe-4 m-0">Social Login</h3>
-                            {/* <div className="form-floating">
-                                <button className="btn"><i style={{color :"#3ecf8e"}} className="fa-brands fa-google fa-2x"></i></button>
-                            </div> */}
                             <div className="form-floating">
                                 <button onClick={signInWithDiscord} className="btn"><i style={{color :"#3ecf8e"}} className="fa-brands fa-discord fa-2x"></i></button>
                             </div>
